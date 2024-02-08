@@ -13,7 +13,7 @@ variable "proxmox_api_token_id" {
 
 variable "proxmox_api_token_secret" {
     type = string
-    sensitive = true
+    #sensitive = true
 }
 
 # Resource Definiation for the VM Template
@@ -23,12 +23,16 @@ source "proxmox" "ubuntu-server-focal-docker" {
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
     token = "${var.proxmox_api_token_secret}"
+    #password = "${var.proxmox_api_token_secret}"
+    #token_  = "${var.proxmox_api_token_secret}"
+    #username = "chad"
+    #password = "chad"
     # (Optional) Skip TLS Verification
-    # insecure_skip_tls_verify = true
+    insecure_skip_tls_verify = true
     
     # VM General Settings
-    node = "your-proxmox-node"
-    vm_id = "100"
+    node = "proxmox-node"
+    vm_id = "125"
     vm_name = "ubuntu-server-focal-docker"
     template_description = "Ubuntu Server Focal Image with Docker pre-installed"
 
@@ -37,8 +41,8 @@ source "proxmox" "ubuntu-server-focal-docker" {
     # iso_file = "local:iso/ubuntu-20.04.2-live-server-amd64.iso"
     # - or -
     # (Option 2) Download ISO
-    # iso_url = "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
-    # iso_checksum = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
+    iso_url = "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
+    iso_checksum = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
     iso_storage_pool = "local"
     unmount_iso = true
 
@@ -67,6 +71,7 @@ source "proxmox" "ubuntu-server-focal-docker" {
         model = "virtio"
         bridge = "vmbr0"
         firewall = "false"
+        vlan_tag = "5"
     } 
 
     # VM Cloud-Init Settings
@@ -87,17 +92,17 @@ source "proxmox" "ubuntu-server-focal-docker" {
     # PACKER Autoinstall Settings
     http_directory = "http" 
     # (Optional) Bind IP Address and Port
-    # http_bind_address = "0.0.0.0"
-    # http_port_min = 8802
-    # http_port_max = 8802
+    http_bind_address = "0.0.0.0"
+    http_port_min = 8802
+    http_port_max = 8802
 
-    ssh_username = "your-user-name"
+    ssh_username = "chad"
 
     # (Option 1) Add your Password here
-    # ssh_password = "your-password"
+    #ssh_password = "chad"
     # - or -
     # (Option 2) Add your Private SSH KEY file here
-    # ssh_private_key_file = "~/.ssh/id_rsa"
+    ssh_private_key_file = "~/.ssh/id_rsa"
 
     # Raise the timeout, when installation takes longer
     ssh_timeout = "20m"

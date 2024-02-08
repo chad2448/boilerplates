@@ -3,7 +3,7 @@ autoinstall:
   version: 1
   locale: en_US
   keyboard:
-    layout: de
+    layout: us
   ssh:
     install-server: true
     allow-pw: true
@@ -20,14 +20,14 @@ autoinstall:
       size: 0
   user-data:
     package_upgrade: false
-    timezone: Europe/Berlin
+    timezone:  America/New_York
     users:
-      - name: your-user-name
+      - name: chad
         groups: [adm, sudo]
         lock-passwd: false
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
-        # passwd: your-password
+        #passwd: password
         # - or -
-        # ssh_authorized_keys:
-        #   - your-ssh-key
+        ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDLC/aJpuicQOTSBXaFnUuzZwgC3DP8qByO9SdItZrMz3LNh1jKtvSQE0OHYhJTxWf0xJtziZV1BlvOn+TIH4eXXytxNZNZbhv6TybHNa+M7PAPEW6QXlkPUyzqhjvGdoklbNQ49HIKEflMIPx1UCxM8fYifnXGnTVzcIVgjMowu2puIL1WN/RFmpWWROqJXddZcWQvaNaNznCcyjDzrJqrKGE1WBEcmV0e2PRmW+0QDG4JyFCfurIcZhnRFD4LA02yLub9aXLeWmQ8VJRFPv/TnvmF8D89ElwagfNAkCIM0q36biueJxTNQYXjKem9dVMCmHZn4fXhiQ4ojGK/k3aHeUrUPl27ahnW/T3YcM9japdNPDt5s4UMHzNTaulEo5OTNEthOXEK+6TM2PC250Va1ljoxXXRjUs5lDs/qTRdJpn9Leb84q/SJ6E3ZCWDfNqyirQRdhWgErWf6bLd/kFnES4nvLK64MShn/Hrbq9sxVZSBsduEf3+PBUhakW0Vk8= chad@OfficePC
