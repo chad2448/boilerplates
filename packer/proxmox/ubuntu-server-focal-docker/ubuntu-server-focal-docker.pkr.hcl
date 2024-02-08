@@ -1,3 +1,12 @@
+packer {
+  required_plugins {
+    name = {
+      version = "~> 1"
+      source  = "github.com/hashicorp/proxmox"
+    }
+  }
+}
+
 # Ubuntu Server Focal Docker
 # ---
 # Packer Template to create an Ubuntu Server (Focal) with Docker on Proxmox
@@ -17,7 +26,7 @@ variable "proxmox_api_token_secret" {
 }
 
 # Resource Definiation for the VM Template
-source "proxmox" "ubuntu-server-focal-docker" {
+source "proxmox-iso" "ubuntu-server-focal-docker" {
  
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
@@ -41,8 +50,10 @@ source "proxmox" "ubuntu-server-focal-docker" {
     # iso_file = "local:iso/ubuntu-20.04.2-live-server-amd64.iso"
     # - or -
     # (Option 2) Download ISO
-    iso_url = "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
-    iso_checksum = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
+    #iso_url = "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
+    #iso_checksum = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
+    iso_url = "https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso"
+    iso_checksum = "b8f31413336b9393ad5d8ef0282717b2ab19f007df2e9ed5196c13d8f9153c8b"
     iso_storage_pool = "local"
     unmount_iso = true
 
@@ -112,7 +123,7 @@ source "proxmox" "ubuntu-server-focal-docker" {
 build {
 
     name = "ubuntu-server-focal-docker"
-    sources = ["source.proxmox.ubuntu-server-focal-docker"]
+    sources = ["source.proxmox-iso.ubuntu-server-focal-docker"]
 
     # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
     provisioner "shell" {
