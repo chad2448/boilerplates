@@ -6,3 +6,6 @@ proxmox_api_url = "https://192.168.1.2:8006/api2/json"  # Your Proxmox IP Addres
 # Old Tokens
 proxmox_api_token_id = "root@pam!packer"
 proxmox_api_token_secret = "5018f9d1-925d-4371-998c-cb7768c722de"
+proxmox_password = "C@ptainAm3rica"
+
+proxmox_username = "root@pam"
