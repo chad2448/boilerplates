@@ -1,26 +1,55 @@
 #cloud-config
 autoinstall:
   version: 1
-  locale: en_US
+  # proxy: 
+  #   early-commands:
+  #     - systemctl stop ssh 
+  locale: en_US.UTF-8
+  package_upgrade: false
+  #timezone:  US/Eastern
   keyboard:
-    layout: us
+    layout: en
+    variant: 'us'
   ssh:
     install-server: true
     allow-pw: true
-    disable_root: true
+    disable_root: false
     ssh_quiet_keygen: true
     allow_public_ssh_keys: true
+  identity:
+    hostname: ubuntu-server
+    username: chad
+    password: chad
+    realname: chad
   packages:
+    - openssh-server
     - qemu-guest-agent
+    - cloud-init
     - sudo
+  late-commands:
+  #   - 'sed -i 's/^#*\(send dhcp-client-identifier\).*$/\1 = hardware;/' /target/etc/dhcp/dhclient.conf'
+  #  - 'sed -i "s/dhcp4: true/&\n      dhcp-identifier: mac/" /target/etc/netplan/00-installer-config.yaml'
+    - curtin in-target -- apt-get update
+    - curtin in-target -- apt-get install qemu-guest-agent
+    - systemctl start qemu-guest-agent
+    - systemctl enable qemu-guest-agent
+  # network:
+  #   network:
+  #     version: 2
+  #     ethernets:
+  #       ens18:
+  #         dhcp4: true
+  #         dhcp-identifier: mac
+  refresh-installer: 
+    update: false
   storage:
     layout:
       name: direct
     swap:
       size: 0
   user-data:
+    timezone:  US/Eastern
     package_upgrade: false
-    timezone:  America/New_York
     users:
       - name: chad
         groups: [adm, sudo]
