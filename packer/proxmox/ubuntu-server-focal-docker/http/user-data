@@ -26,13 +26,13 @@ autoinstall:
     - qemu-guest-agent
     - cloud-init
     - sudo
-  late-commands:
-    - 'sed -i 's/^#*\(send dhcp-client-identifier\).*$/\1 = hardware;/' /target/etc/dhcp/dhclient.conf'
-    - 'sed -i "s/dhcp4: true/&\n      dhcp-identifier: mac/" /target/etc/netplan/00-installer-config.yaml'
-    - curtin in-target -- apt-get update
-    - curtin in-target -- apt-get install qemu-guest-agent
-    - systemctl start qemu-guest-agent
-    - systemctl enable qemu-guest-agent
+  # late-commands:
+  #   - 'sed -i 's/^#*\(send dhcp-client-identifier\).*$/\1 = hardware;/' /target/etc/dhcp/dhclient.conf'
+  #   - 'sed -i "s/dhcp4: true/&\n      dhcp-identifier: mac/" /target/etc/netplan/00-installer-config.yaml'
+  #   - curtin in-target -- apt-get update
+  #   - curtin in-target -- apt-get install qemu-guest-agent
+  #   - systemctl start qemu-guest-agent
+  #   - systemctl enable qemu-guest-agent
   # network:
   #   network:
   #     version: 2
